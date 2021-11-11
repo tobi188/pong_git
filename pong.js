@@ -4,7 +4,7 @@ var context = canvas.getContext('2d');
 var x = canvas.width/2, y = canvas.height/2;
 var radius = 10;
 var paddleW = 20, paddleH = 100, paddleMove = 10;
-var dx = 8, dy = 7;
+var dx = 3, dy = 2;
 var scoreL = scoreR = 0;
 const WIN = 1;
 var soundP = document.getElementById("soundPong");
