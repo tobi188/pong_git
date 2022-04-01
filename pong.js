@@ -4,13 +4,9 @@ var context = canvas.getContext('2d');
 var x = canvas.width/2, y = canvas.height/2;
 var radius = 10;
 var paddleW = 20, paddleH = 100, paddleMove = 10;
-var dx = 3, dy = 2;
+var dx = 4, dy = 5;
 var scoreL = scoreR = 0;
-const WIN = 1;
-var soundP = document.getElementById("soundPong");
-var soundS = document.getElementById("soundScore");
-var soundC = document.getElementById("soundCheer");
-var soundB = document.getElementById("soundBackground");
+const WIN = 10;
 var gameStart = false;
 var start = document.getElementById("start");
 
@@ -117,17 +113,13 @@ function ballCollideCanvas(){
 function ballCollidePadlle(){
 	
 	if((x - radius <= paddleW) && (y + radius <= paddleLeft.y + paddleH) && (y - radius >= paddleLeft.y)){
-		soundP.volume = 0.3;
-		soundP.play();
 		dx = -dx;
 	}
 	else if(x + radius >= canvas.width){
-		soundS.volume = 0.8;
-		soundS.play();
 		scoreL++;
 		if(scoreL == WIN){
 			gamerOver = true;
-			soundC.play();
+			
 		}else {
 			x = canvas.width/2;
 			y = canvas.height/2;
@@ -137,17 +129,14 @@ function ballCollidePadlle(){
 		}
 	}
 	if((x + radius  >= canvas.width - paddleW) && (y + radius <= paddleRight.y + paddleH) && (y - radius >= paddleRight.y)){
-		soundP.volume = 0.3;
-		soundP.play();
+		
 		dx = -dx;
 	}
 	else if(x < radius){
-		soundS.volume = 0.8;
-		soundS.play();
+		
 		scoreR++;
 		if(scoreR == WIN){
-			gamerOver = true;
-			soundC.play();			
+			gamerOver = true;	
 		}else {
 			x = canvas.width/2;
 			y = canvas.height/2;
@@ -206,11 +195,8 @@ function draw(){
 	ballCollideCanvas();
 	controlPaddle();
 	scoreDraw();
-	soundB.volume = 0.5;
-	soundB.play();
+	
 	if(gamerOver){
-		soundB.pause();
-		soundB.currentTime = 0;
 		x = canvas.width/2, y = canvas.height/2 - 10;
 		if(scoreL == WIN){
 			context.fillStyle = "yellow";
